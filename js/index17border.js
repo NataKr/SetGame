@@ -12,26 +12,19 @@ class Card extends React.Component {
     super(props);
     this.selectCard=this.selectCard.bind(this);
     this.state={
-      // cardSelected:this.props.cardIsSelected
       cardSelected:this.props.selectedCard,
-      // cardIsChecked:false,
-      // inputIsChecked:this.props.isCheckedValueDafault
     }
-    // this.state.chosenCards=[];
   }
 
   selectCard(e){
-    // this.setState({inputIsChecked: e.target.value});
-    // console.log(e.target);
+
     this.setState({cardSelected: true});
     var element=e.target;
     var color=this.props.allProperties.color;
     console.log(color);
-    // this.setState({cardIsChecked:true});
+
     this.props.handleChange(this.props.allProperties);
-    // this.state.chosenCards.push(this.props.allProperties);
-    // this.setState({ chosenCards: this.state.chosenCards});
-    // console.log(this.state.chosenCards);
+
   }
 
   render(){
@@ -40,7 +33,7 @@ class Card extends React.Component {
         <div className="card" id={this.props.elementId} onClick={this.selectCard}>
           {this.props.allProperties.number.map((card, i) => <Img key={'img'+i} config={this.props.allProperties}></Img>)}
         </div>
-        {/* <input type="checkbox" checked={this.state.inputIsChecked} value={this.state.inputIsChecked} onChange={this.selectCard}/> */}
+
     </div>
   }
 }
@@ -65,7 +58,8 @@ class App extends React.Component{
       selected: false,
       minutes: 0,
       seconds:0,
-      hours: 0
+      hours: 0,
+      setsFound:0
     }
   }
 
@@ -77,18 +71,13 @@ class App extends React.Component{
     if (this.chosenCards.length==3){
       var result=Cards.compareCards(this.chosenCards);
       if (result){
+        this.setState({setsFound:this.state.setsFound+1});
         alert("you have a set");
       } else {
         alert("this is not a set");
       }
-      // if (this.chosenCards[0].color==this.chosenCards[1].color && this.chosenCards[0].color==this.chosenCards[2].color){
-      //   alert("you have a set");
-      // }else{
-      //   alert("this is not a set");
-      // }
       console.log(this.chosenCards);
       this.chosenCards=[];
-      // this.counter=0;
     }
     console.log(this.chosenCards);
   }
@@ -99,101 +88,13 @@ class App extends React.Component{
     this.setState({cardsProps: allCards});
   }
 
-  // compareCards(chosenCardsArray){
-  //   var counter=0;
-  //   if ((chosenCardsArray[0].color==chosenCardsArray[1].color && chosenCardsArray[2].color==chosenCardsArray[0].color)||
-  //       (chosenCardsArray[0].shape==chosenCardsArray[1].shape && chosenCardsArray[2].shape==chosenCardsArray[0].shape)||
-  //       (chosenCardsArray[0].outline==chosenCardsArray[1].outline && chosenCardsArray[2].outline==chosenCardsArray[0].outline)||
-  //       (chosenCardsArray[0].number.length==chosenCardsArray[1].number.length && chosenCardsArray[2].number.length==chosenCardsArray[0].number.length)){
-  //
-  //     if (chosenCardsArray[0].color==chosenCardsArray[1].color && chosenCardsArray[2].color==chosenCardsArray[0].color){
-  //       if (chosenCardsArray[0].outline==chosenCardsArray[1].outline || chosenCardsArray[0].outline==chosenCardsArray[2].outline || chosenCardsArray[1].outline==chosenCardsArray[2].outline){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].shape==chosenCardsArray[1].shape || chosenCardsArray[0].shape==chosenCardsArray[2].shape || chosenCardsArray[1].shape==chosenCardsArray[2].shape){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].number.length==chosenCardsArray[1].number.length || chosenCardsArray[0].number.length==chosenCardsArray[2].number.length || chosenCardsArray[1].number.length==chosenCardsArray[2].number.length){
-  //         counter++;
-  //       }
-  //       console.log(counter);
-  //     }
-  //     if (chosenCardsArray[0].shape==chosenCardsArray[1].shape && chosenCardsArray[2].shape==chosenCardsArray[0].shape){
-  //       if (chosenCardsArray[0].color==chosenCardsArray[1].color || chosenCardsArray[0].color==chosenCardsArray[2].color || chosenCardsArray[1].color==chosenCardsArray[2].color){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].outline==chosenCardsArray[1].outline || chosenCardsArray[0].outline==chosenCardsArray[2].outline || chosenCardsArray[1].outline==chosenCardsArray[2].outline){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].number.length==chosenCardsArray[1].number.length || chosenCardsArray[0].number.length==chosenCardsArray[2].number.length || chosenCardsArray[1].number.length==chosenCardsArray[2].number.length){
-  //         counter++;
-  //       }
-  //       console.log(counter);
-  //     }
-  //     if (chosenCardsArray[0].outline==chosenCardsArray[1].outline && chosenCardsArray[2].outline==chosenCardsArray[0].outline){
-  //       if (chosenCardsArray[0].color==chosenCardsArray[1].color || chosenCardsArray[0].color==chosenCardsArray[2].color || chosenCardsArray[1].color==chosenCardsArray[2].color){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].shape==chosenCardsArray[1].shape || chosenCardsArray[0].shape==chosenCardsArray[2].shape || chosenCardsArray[1].shape==chosenCardsArray[2].shape){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].number.length==chosenCardsArray[1].number.length || chosenCardsArray[0].number.length==chosenCardsArray[2].number.length || chosenCardsArray[1].number.length==chosenCardsArray[2].number.length){
-  //         counter++;
-  //       }
-  //       console.log(counter);
-  //     }
-  //     if (chosenCardsArray[0].number.length==chosenCardsArray[1].number.length && chosenCardsArray[2].number.length==chosenCardsArray[0].number.length){
-  //       if (chosenCardsArray[0].color==chosenCardsArray[1].color || chosenCardsArray[0].color==chosenCardsArray[2].color || chosenCardsArray[1].color==chosenCardsArray[2].color){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].shape==chosenCardsArray[1].shape || chosenCardsArray[0].shape==chosenCardsArray[2].shape || chosenCardsArray[1].shape==chosenCardsArray[2].shape){
-  //         counter++;
-  //       }
-  //       if (chosenCardsArray[0].outline==chosenCardsArray[1].outline || chosenCardsArray[0].outline==chosenCardsArray[2].outline || chosenCardsArray[1].outline==chosenCardsArray[2].outline){
-  //         counter++;
-  //       }
-  //       console.log(counter);
-  //     }
-  //   }else{
-  //     if (chosenCardsArray[0].color==chosenCardsArray[1].color || chosenCardsArray[0].color==chosenCardsArray[2].color || chosenCardsArray[1].color==chosenCardsArray[2].color){
-  //       counter++;
-  //       console.log(counter);
-  //     }
-  //     if (chosenCardsArray[0].shape==chosenCardsArray[1].shape || chosenCardsArray[0].shape==chosenCardsArray[2].shape || chosenCardsArray[1].shape==chosenCardsArray[2].shape){
-  //       counter++;
-  //       console.log(counter);
-  //     }
-  //     if (chosenCardsArray[0].outline==chosenCardsArray[1].outline || chosenCardsArray[0].outline==chosenCardsArray[2].outline || chosenCardsArray[1].outline==chosenCardsArray[2].outline){
-  //       counter++;
-  //       console.log(counter);
-  //     }
-  //     if (chosenCardsArray[0].number.length==chosenCardsArray[1].number.length || chosenCardsArray[0].number.length==chosenCardsArray[2].number.length || chosenCardsArray[1].number.length==chosenCardsArray[2].number.length){
-  //       counter++;
-  //       console.log(counter);
-  //     }
-  //     console.log(counter);
-  //   }
-  //         // counter++;
-  //     // console.log(counter);
-  //
-  //   console.log(counter);
-  //   if (counter==0){
-  //     return true;
-  //   }else{
-  //     return false;
-  //   }
-  // }
-  //
-  // componentDidMount(){
-  //   this.chosenCards
-  // }
 
   getCardsField(){
     var cardsArray=[];
     this.setState({seconds: 0, minutes: 0, hours: 0});
     for(var i=0; i<12; i++){
       var newCard=this.getCard();
-      // console.log(newCard);
+
       if (cardsArray.length==0){
         cardsArray.push(newCard);
       }else{
@@ -202,7 +103,7 @@ class App extends React.Component{
         }
         cardsArray.push(newCard);
       }
-      // console.log(cardsArray);
+
     }
     return cardsArray;
   }
@@ -245,12 +146,12 @@ class App extends React.Component{
   }
 
   render(){
-    //a function that would determines the images
-    // var img=<Img/>
+
     var self=this;
     return <div className="game-wrap">
           <div className="game-title">Find all sets</div>
           <div className="timer">{this.state.hours}:{this.state.minutes}:{this.state.seconds}</div>
+          <div id="sets-found">Sets: {this.state.setsFound}</div>
           <button id="reset-btn" onClick={this.resetCardField}>Reset</button>
           <div className="all-cards-field">
           {this.cardsSet.map(function(cardNo, index){
