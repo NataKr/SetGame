@@ -18,19 +18,21 @@ class Card extends React.Component {
 
   selectCard(e){
 
-    this.setState({cardSelected: true});
-    var element=e.target;
-    var color=this.props.allProperties.color;
-    console.log(color);
+    // this.setState({cardSelected: true});
+    var element=this;
+    console.log(element);
+    // this.props.handleChange(this.props.allProperties);
 
-    this.props.handleChange(this.props.allProperties);
-
+    var object_to_pass=this.props.allProperties;
+    object_to_pass["id"]=this.props.elementId;
+    document.getElementById(this.props.elementId).classList.add("true");
+    this.props.handleChange(object_to_pass);
   }
 
   render(){
     var self=this;
-    return <div className={"card-wrap "+this.state.cardSelected}>
-        <div className="card" id={this.props.elementId} onClick={this.selectCard}>
+    return <div className={"card-wrap "} id={this.props.elementId}>
+        <div className="card" onClick={this.selectCard}>
           {this.props.allProperties.number.map((card, i) => <Img key={'img'+i} config={this.props.allProperties}></Img>)}
         </div>
 
@@ -77,6 +79,9 @@ class App extends React.Component{
         alert("this is not a set");
       }
       console.log(this.chosenCards);
+      for(var i=0; i<this.chosenCards.length; i++){
+        document.getElementById(this.chosenCards[i].id).classList.remove("true");
+      }
       this.chosenCards=[];
     }
     console.log(this.chosenCards);
