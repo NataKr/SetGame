@@ -101,7 +101,7 @@ class App extends React.Component{
   resetCardField(){
     var allCards=this.getCardsField();
     console.log(allCards);
-    this.setState({cardsProps: allCards});
+    this.setState({cardsProps: allCards, setsFound: 0});
   }
 
   getCardsField(){
