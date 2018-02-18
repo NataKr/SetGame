@@ -19,11 +19,19 @@ class Card extends React.Component {
   selectCard(e){
 
     this.setState({cardSelected: true});
-    var element=e.target;
-    var color=this.props.allProperties.color;
-    console.log(color);
+    // var element=e.target;
+    // var color=this.props.allProperties.color;
+    // console.log(color);
+    //
+    // this.props.handleChange(this.props.allProperties);
+    var element=this;
+    console.log(element);
+    // this.props.handleChange(this.props.allProperties);
 
-    this.props.handleChange(this.props.allProperties);
+    var object_to_pass=this.props.allProperties;
+    object_to_pass["id"]=this.props.elementId;
+    document.getElementById(this.props.elementId).classList.add("true");
+    this.props.handleChange(object_to_pass);
 
   }
 
@@ -66,7 +74,17 @@ class App extends React.Component{
   getSet(cardObj){
     console.log(cardObj);
     if (this.chosenCards.length<3){
-      this.chosenCards.push(cardObj);
+      var flag=true;
+      for (var i=0; i<this.chosenCards.length; i++){
+        if (this.chosenCards[i].id==cardObj.id){
+          flag=false;
+          alert("this card has been selected already");
+          break;
+        }
+      }
+      if (flag){
+        this.chosenCards.push(cardObj);
+      }
     }
     if (this.chosenCards.length==3){
       var result=Cards.compareCards(this.chosenCards);

@@ -68,7 +68,18 @@ class App extends React.Component{
   getSet(cardObj){
     console.log(cardObj);
     if (this.chosenCards.length<3){
-      this.chosenCards.push(cardObj);
+      var flag=true;
+      for (var i=0; i<this.chosenCards.length; i++){
+        if (this.chosenCards[i].id==cardObj.id){
+          flag=false;
+          alert("this card has been selected already");
+          break;
+        }
+      }
+      if (flag){
+        this.chosenCards.push(cardObj);
+      }
+      // this.chosenCards.push(cardObj);
     }
     if (this.chosenCards.length==3){
       var result=Cards.compareCards(this.chosenCards);
@@ -93,7 +104,6 @@ class App extends React.Component{
     this.setState({cardsProps: allCards});
   }
 
-
   getCardsField(){
     var cardsArray=[];
     this.setState({seconds: 0, minutes: 0, hours: 0});
@@ -110,7 +120,6 @@ class App extends React.Component{
         }
         cardsArray.push(newCard);
       }
-
     }
     return cardsArray;
   }
