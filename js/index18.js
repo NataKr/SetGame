@@ -61,7 +61,8 @@ class App extends React.Component{
       minutes: 0,
       seconds:0,
       hours: 0,
-      setsFound:0
+      setsFound:0,
+      setsAvaialable: ""
     }
   }
 
@@ -101,7 +102,8 @@ class App extends React.Component{
   resetCardField(){
     var allCards=this.getCardsField();
     console.log(allCards);
-    this.setState({cardsProps: allCards, setsFound: 0});
+    var totalSets=Cards.getNumberOfSets(allCards);
+    this.setState({cardsProps: allCards, setsFound: 0, setsAvaialable: totalSets});
   }
 
   getCardsField(){
@@ -167,7 +169,7 @@ class App extends React.Component{
     return <div className="game-wrap">
           <div className="game-title">Find all sets</div>
           <div className="timer">{this.state.hours}:{this.state.minutes}:{this.state.seconds}</div>
-          <div id="sets-found">Sets: {this.state.setsFound}</div>
+          <div id="sets-found">Sets: {this.state.setsFound} of {this.state.setsAvaialable}</div>
           <button id="reset-btn" onClick={this.resetCardField}>Reset</button>
           <div className="all-cards-field">
           {this.cardsSet.map(function(cardNo, index){

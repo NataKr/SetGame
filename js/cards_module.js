@@ -84,3 +84,72 @@ Cards.compareCards=function(chosenCardsArray){
     return false;
   }
 }
+
+
+Cards.getNumberOfSets=function(cards){
+  var cardsToObject={}
+  var counter=0;
+  for (var i=0; i<cards.length; i++){
+    cardsToObject[i]=cards[i];
+  }
+  console.log(cardsToObject);
+  for (var i=0; i<cards.length-2; i++){
+    if (cardsToObject[i].color==cardsToObject[i+1].color && cardsToObject[i].shape!=cardsToObject[i+1].shape && cardsToObject[i].outline!=cardsToObject[i+1].outline
+      && cardsToObject[i].number.length!=cardsToObject[i+1].number.length){
+      for (var j=i+2; j<cards.length; j++){
+        if (cardsToObject[i].color==cardsToObject[j].color && cardsToObject[i].shape!=cardsToObject[j].shape && cardsToObject[i+1].shape!=cardsToObject[j].shape
+            && cardsToObject[i].outline!=cardsToObject[j].outline && cardsToObject[i+1].outline!=cardsToObject[j].outline
+            && cardsToObject[i].number.length!=cardsToObject[j].number.length && cardsToObject[i+1].number.length!=cardsToObject[j].number.length){
+          counter++;
+          console.log("same color "+ counter);
+        }
+      }
+    }
+    if (cardsToObject[i].shape==cardsToObject[i+1].shape && cardsToObject[i].color!=cardsToObject[i+1].color && cardsToObject[i].outline!=cardsToObject[i+1].outline
+      && cardsToObject[i].number.length!=cardsToObject[i+1].number.length){
+        for (var j=i+2; j<cards.length; j++){
+          if (cardsToObject[i].shape==cardsToObject[j].shape && cardsToObject[i].color!=cardsToObject[j].color && cardsToObject[i+1].color!=cardsToObject[j].color
+              && cardsToObject[i].outline!=cardsToObject[j].outline && cardsToObject[i+1].outline!=cardsToObject[j].outline
+              && cardsToObject[i].number.length!=cardsToObject[j].number.length && cardsToObject[i+1].number.length!=cardsToObject[j].number.length){
+            counter++;
+            console.log("same shape "+ counter);
+          }
+        }
+      }
+      if (cardsToObject[i].outline==cardsToObject[i+1].outline && cardsToObject[i].color!=cardsToObject[i+1].color && cardsToObject[i].shape!=cardsToObject[i+1].shape
+        && cardsToObject[i].number.length!=cardsToObject[i+1].number.length){
+          for (var j=i+2; j<cards.length; j++){
+            if (cardsToObject[i].outline==cardsToObject[j].outline && cardsToObject[i].color!=cardsToObject[j].color && cardsToObject[i+1].color!=cardsToObject[j].color
+                && cardsToObject[i].shape!=cardsToObject[j].shape && cardsToObject[i+1].shape!=cardsToObject[j].shape
+                && cardsToObject[i].number.length!=cardsToObject[j].number.length && cardsToObject[i+1].number.length!=cardsToObject[j].number.length){
+              counter++;
+              console.log("same outline "+ counter);
+            }
+          }
+        }
+        if (cardsToObject[i].number.length==cardsToObject[i+1].number.length && cardsToObject[i].color!=cardsToObject[i+1].color && cardsToObject[i].shape!=cardsToObject[i+1].shape
+          && cardsToObject[i].outline!=cardsToObject[i+1].outline){
+            for (var j=i+2; j<cards.length; j++){
+              if (cardsToObject[i].number.length==cardsToObject[j].number.length && cardsToObject[i].color!=cardsToObject[j].color && cardsToObject[i+1].color!=cardsToObject[j].color
+                  && cardsToObject[i].shape!=cardsToObject[j].shape && cardsToObject[i+1].shape!=cardsToObject[j].shape
+                  && cardsToObject[i].outline!=cardsToObject[j].outline && cardsToObject[i+1].outline!=cardsToObject[j].outline){
+                counter++;
+                console.log("same number "+ counter);
+              }
+            }
+          }
+          if (cardsToObject[i].number.length!=cardsToObject[i+1].number.length && cardsToObject[i].color!=cardsToObject[i+1].color && cardsToObject[i].shape!=cardsToObject[i+1].shape
+            && cardsToObject[i].outline!=cardsToObject[i+1].outline){
+              for (var j=i+2; j<cards.length; j++){
+                if (cardsToObject[i].number.length!=cardsToObject[j].number.length && cardsToObject[i+1].number.length!=cardsToObject[j].number.length && cardsToObject[i].color!=cardsToObject[j].color && cardsToObject[i+1].color!=cardsToObject[j].color
+                    && cardsToObject[i].shape!=cardsToObject[j].shape && cardsToObject[i+1].shape!=cardsToObject[j].shape
+                    && cardsToObject[i].outline!=cardsToObject[j].outline && cardsToObject[i+1].outline!=cardsToObject[j].outline){
+                  counter++;
+                  console.log("no match "+ counter);
+                }
+              }
+            }
+  }
+  console.log("total: "+counter);
+  return counter;
+}
